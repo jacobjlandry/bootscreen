@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class Comics extends React.Component {
+export class Frame extends React.Component {
     constructor(props) {
         super(props);
 
@@ -9,10 +9,7 @@ export class Comics extends React.Component {
             statusClass: "text-yellow-300",
             content: '',
             current: 0,
-            urls: [
-                'https://garfield.com',
-                'https://dilbert.com'
-            ]
+            urls: props.urls
         }
 
         this.load();
@@ -30,8 +27,8 @@ export class Comics extends React.Component {
 
     render() {
         return (
-            <div className={`border border-white rounded-lg p-4 bg-gray-700 ${ this.state.statusClass } flex-grow mx-2`}>
-                <iframe className="w-full" src={this.state.urls[this.state.current]}></iframe>
+            <div style={{ height: this.props.height + "px"}} className={`border border-white rounded-lg p-4 bg-gray-700 ${ this.state.statusClass } flex-grow mx-2 row-span-${this.props.rowspan} col-span-${this.props.colspan}`}>
+                <iframe className="w-full h-full" src={this.state.urls[this.state.current]}></iframe>
             </div>
         )
     }
