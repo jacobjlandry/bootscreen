@@ -1,28 +1,34 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Wisenheimer} from "./Wisenheimer";
+import {UrlStatus} from "./UrlStatus";
 import {Frame} from "./Frame";
 import {Text} from "./Text"
+import {CurrentDate} from "./CurrentDate"
 
 class App extends React.Component {
     constructor() {
         super();
 
+        this.urls = [
+            "https://xkcd.com",
+            "https://tinyview.com/fowl-language",
+            "https://tinyview.com/lunarbaboon",
+            "http://www.channelate.com",
+            "https://loadingartist.com",
+            "https://explosm.net",
+            "https://news-web.php.net/php.internals",
+            "https://www.phpweekly.com/archive/latest.html",
+            "https://www.infoworld.com/category/java/",
+        ];
+
         this.state = {
             layout: [
-                [<Wisenheimer rowspan={1} colspan={1} />, <Text rowspan={1} colspan={3}> Some other relevant content could go here </Text> ],
-                [<Frame height={1000} urls={["https://garfield.com", "https://dilbert.com"]} rowspan={4} colspan={3} />, <Frame urls={['https://trapperkeeper.wisenheimer.xyz']} rowspan={4} colspan={1} />],
+                [<UrlStatus url={"https://wisenheimer.xyz"} rowspan={1} colspan={1} />, <CurrentDate rowspan={1} colspan={3} /> ],
+                [<Frame id={"comics"} name={"comics"} title={"comics"} height={1000} urls={this.urls} rowspan={4} colspan={3} />, <Frame urls={['https://trapperkeeper.wisenheimer.xyz']} rowspan={4} colspan={1} />],
                 [<Text rowspan={1} colspan={4}>Have a wonderful day!</Text>]
             ]
         }
-    }
-
-    addColumn(index) {
-        let layout = this.state.layout;
-        layout[index].push(<Wisenheimer />);
-
-        this.setState({ layout: layout } );
     }
 
     render() {
@@ -37,7 +43,7 @@ class App extends React.Component {
                 <div className="grid grid-rows-10 gap-4 m-4 pb-4">
                     {this.state.layout.map( (row, index) => (
                             <>
-                            {row.map(column => (
+                            {row.map((column, index) => (
                                 column
                             ))}
                             </>
@@ -49,7 +55,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-/**
- * <button className="rounded-lg bg-green-300 text-white p-4" onClick={this.addColumn.bind(this, index)}> Add Column</button>
- */

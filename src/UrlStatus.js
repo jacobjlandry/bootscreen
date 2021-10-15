@@ -1,7 +1,7 @@
 import React from 'react';
 import Ping from 'ping-url';
 
-export class Wisenheimer extends React.Component {
+export class UrlStatus extends React.Component {
     constructor(props) {
         super(props);
 
@@ -14,7 +14,7 @@ export class Wisenheimer extends React.Component {
     }
 
     test() {
-        Ping.check('https://wisenheimer.xyz').then(res => {
+        Ping.check(this.props.url).then(res => {
             if(res.status) {
                 this.setState({ status: "Online" });
                 this.setState({ statusClass: "text-green-300" });
@@ -30,7 +30,7 @@ export class Wisenheimer extends React.Component {
 
     render() {
         return (
-            <div className={`row-span-${this.props.rowspan} col-span-${this.props.colspan} border border-white rounded-lg p-4 bg-gray-700 ${ this.state.statusClass } flex-grow mx-2`}>
+            <div className={`row-span-${this.props.rowspan} col-span-${this.props.colspan} border border-white rounded-lg p-4 bg-gray-700 ${ this.state.statusClass } flex-grow`}>
                 <a className="underline" href="https://wisenheimer.xyz" target="_BLANK" rel="noreferrer">Wisenheimer</a> : { this.state.status }
             </div>
         )

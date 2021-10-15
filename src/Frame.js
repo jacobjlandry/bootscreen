@@ -5,31 +5,44 @@ export class Frame extends React.Component {
         super(props);
 
         this.state = {
-            status: "loading",
-            statusClass: "text-yellow-300",
             content: '',
             current: 0,
-            urls: props.urls
+            urls: props.urls,
+            urlContents: ""
         }
-
-        this.load();
     }
 
-    load() {
-        fetch(this.state.urls[this.state.current])
-            .then(result => {
-                this.setState({ status: 'success', statusClass: 'text-green-300', content: result });
-            })
-            .catch(result => {
-                this.setState( { status: 'failed', statusClass: 'text-red-300' });
-            });
+    nextUrl() {
+        console.log('next');
+        if(this.state.urls.length > 1) {
+            if(this.state.current < (this.state.urls.length - 1)) {
+                this.setState({ current: this.state.current + 1 });
+            } else {
+                this.setState({ current: 0 });
+            }
+        }
+    }
+
+    previousUrl() {
+        console.log('previous');
+        if(this.state.urls.length > 1) {
+            if(this.state.current > 0) {
+                this.setState({ current: this.state.current - 1 });
+            } else {
+                this.setState({ current: this.state.urls.length - 1 });
+            }
+        }
     }
 
     render() {
         return (
-            <div style={{ height: this.props.height + "px"}} className={`border border-white rounded-lg p-4 bg-gray-700 ${ this.state.statusClass } flex-grow mx-2 row-span-${this.props.rowspan} col-span-${this.props.colspan}`}>
-                <iframe className="w-full h-full" src={this.state.urls[this.state.current]}></iframe>
+            <div style={{ height: this.props.height + "px"}} className={`border border-white rounded-lg p-4 pb-8 bg-gray-700 text-yellow-300 flex-grow row-span-${this.props.rowspan} col-span-${this.props.colspan}`}>
+                <iframe name={this.props.name} title={this.props.title} className="w-full h-full" src={this.state.urls[this.state.current]}></iframe>
+                <div className={(this.props.urls.length > 1) ? "flex flex-row justify-between items-center" : "hidden"}>
+                    <button onClick={() => {this.previousUrl()}}>Previous</button> <button onClick={() => {this.nextUrl(); }}>Next</button>
+                </div>
             </div>
         )
     }
+    // @TODO be able to step through 'next' url
 }
