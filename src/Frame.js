@@ -36,7 +36,7 @@ export class Frame extends React.Component {
 
     render() {
         return (
-            <div style={{ height: this.props.height + "px"}} className={`border border-white rounded-lg p-4 pb-8 bg-gray-700 text-yellow-300 flex-grow row-span-${this.props.rowspan} col-span-${this.props.colspan}`}>
+            <div style={{ height: this.props.height + "px"}} className={`border border-white rounded-lg p-4 pb-8 bg-gray-700 text-yellow-300 row-span-${this.props.rowspan} col-span-${this.props.colspan}`}>
                 <iframe name={this.props.name} title={this.props.title} className="w-full h-full" src={this.state.urls[this.state.current]}></iframe>
                 <div className={(this.props.urls.length > 1) ? "flex flex-row justify-between items-center" : "hidden"}>
                     <button onClick={() => {this.previousUrl()}}>Previous</button> <button onClick={() => {this.nextUrl(); }}>Next</button>
