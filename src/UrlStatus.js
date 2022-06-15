@@ -1,5 +1,4 @@
 import React from 'react';
-import Ping from 'ping-url';
 
 export class UrlStatus extends React.Component {
     constructor(props) {
