@@ -24,7 +24,7 @@ class App extends React.Component {
 
         this.state = {
             layout: [
-                [<UrlStatus url={"https://wisenheimer.xyz"} rowspan={1} colspan={1} />, <CurrentDate rowspan={1} colspan={3} /> ],
+                [<UrlStatus url={"http://wisenheimer.local/api/ping"} rowspan={1} colspan={1} />, <CurrentDate rowspan={1} colspan={3} /> ],
                 [<Frame id={"comics"} name={"comics"} title={"comics"} height={1000} urls={this.urls} rowspan={4} colspan={3} />, <Frame id={"trapperkeeper"} name={"trapperkeeper"} title={"trapperkeeper"} height={1000} urls={['https://trapperkeeper.wisenheimer.xyz/schedule/6155145ac5dfde4cde6f3992?focus=true']} rowspan={4} colspan={1} />],
                 [<Text rowspan={1} colspan={4}>Have a wonderful day!</Text>]
             ]
